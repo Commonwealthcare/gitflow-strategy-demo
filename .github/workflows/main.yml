@@ -1,5 +1,19 @@
 name: Gitflow Release Demo
 run-name: ${{ github.run_number }} - Deploy for ${{ github.sha }}
+description: A demo of Gitflow strategy
+
+inputs:
+  fail-on:
+    description: "Which stage should this fail on?"
+    required: true
+    default: "None"
+    options:
+      - "None"
+      - "dev"
+      - "test"
+      - "uat"
+      - "prod"
+
 on:
   workflow_dispatch:
   push:
@@ -26,5 +40,9 @@ jobs:
         DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         DB_URL: ${{ vars.DB_URL }}
         DB_USERNAME: ${{ vars.DB_USERNAME }}
-      
+    
+    - name: Failing code
+      if: ${{ inputs.fail-on }} == ${{ environment.name }}
+    
+
     

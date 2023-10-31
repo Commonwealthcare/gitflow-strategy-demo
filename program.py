@@ -9,10 +9,9 @@ DB_URL = os.getenv('DB_URL')
 DB_USERNAME = os.getenv('DB_USERNAME')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
 
-
-print("DB_URL:" + DB_URL)
-print("DB_USERNAME:" + DB_USERNAME)
-print("DB_PASSWORD:" + DB_PASSWORD)
+print("DB_URL: " + DB_URL)
+print("DB_USERNAME: " + DB_USERNAME)
+print("DB_PASSWORD: " + DB_PASSWORD)
 
 print("Deployment completed.")
 
