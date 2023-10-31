@@ -1,5 +1,5 @@
 name: Gitflow Release Demo
-run-name: ${{ github.run_number }} - Deploy for ${{ github.ref_name }}
+run-name: ${{ github.run_number }} - Deploy for ${{ github.sha }}
 on:
   workflow_dispatch:
   push:
