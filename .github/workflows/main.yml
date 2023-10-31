@@ -39,7 +39,82 @@ jobs:
         DB_USERNAME: ${{ vars.DB_USERNAME }}
     
     - name: Failing code
-      if: ${{ inputs.fail-on }} == "dev"
+      if: ${{ inputs.fail-on == 'dev' }}
+      run: exit 1
+
+  deploy-to-test:
+    runs-on: windows-latest
+    needs: deploy-to-dev
+    environment: test
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Deploy to test
+      run: python program.py
+      env:
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        DB_URL: ${{ vars.DB_URL }}
+        DB_USERNAME: ${{ vars.DB_USERNAME }}
+    
+    - name: Failing code
+      if: ${{ inputs.fail-on == 'test' }}
+      run: exit 1
+
+  deploy-to-uat:
+    runs-on: windows-latest
+    needs: deploy-to-test
+    environment: uat
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Deploy to uat
+      run: python program.py
+      env:
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        DB_URL: ${{ vars.DB_URL }}
+        DB_USERNAME: ${{ vars.DB_USERNAME }}
+    
+    - name: Failing code
+      if: ${{ inputs.fail-on == 'uat' }}
+      run: exit 1
+
+  deploy-to-prod:
+    runs-on: windows-latest
+    needs: deploy-to-uat
+    environment: prod
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Deploy to prod
+      run: python program.py
+      env:
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        DB_URL: ${{ vars.DB_URL }}
+        DB_USERNAME: ${{ vars.DB_USERNAME }}
+    
+    - name: Failing code
+      if: ${{ inputs.fail-on == 'prod' }}
       run: exit 1
     
 
