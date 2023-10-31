@@ -1,5 +1,5 @@
 name: Gitflow Release Demo
-run-name: ${{ github.run_number }} - Deploy for ${{ github.sha }}
+# run-name: ${{ github.run_number }} - Deploy for ${{ github.sha }}
 on:
   workflow_dispatch:
     inputs:
@@ -39,7 +39,7 @@ jobs:
         DB_USERNAME: ${{ vars.DB_USERNAME }}
     
     - name: Failing code
-      if: ${{ inputs.fail-on }} == ${{ environment.name }}
+      if: ${{ inputs.fail-on }} == "dev"
       run: exit 1
     
 
