@@ -1,21 +1,18 @@
 name: Gitflow Release Demo
 run-name: ${{ github.run_number }} - Deploy for ${{ github.sha }}
-description: A demo of Gitflow strategy
-
-inputs:
-  fail-on:
-    description: "Which stage should this fail on?"
-    required: true
-    default: "None"
-    options:
-      - "None"
-      - "dev"
-      - "test"
-      - "uat"
-      - "prod"
-
 on:
   workflow_dispatch:
+    inputs:
+    fail-on:
+      description: "Which stage should this fail on?"
+      required: true
+      default: "None"
+      options:
+        - "None"
+        - "dev"
+        - "test"
+        - "uat"
+        - "prod"
   push:
     branches:    
       - main
