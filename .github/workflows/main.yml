@@ -10,10 +10,7 @@ jobs:
   deploy-to-dev:
     runs-on: windows-latest
     environment: dev
-    env:
-      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-      DB_URL: ${{ vars.DB_URL }}
-      DB_USERNAME: ${{ vars.DB_USERNAME }}
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -25,5 +22,9 @@ jobs:
 
     - name: Deploy to Dev
       run: python program.py
+      env:
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        DB_URL: ${{ vars.DB_URL }}
+        DB_USERNAME: ${{ vars.DB_USERNAME }}
       
     
