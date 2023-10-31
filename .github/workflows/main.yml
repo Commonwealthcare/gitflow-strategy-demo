@@ -3,16 +3,16 @@ name: Gitflow Release Demo
 on:
   workflow_dispatch:
     inputs:
-    fail-on:
-      description: "Which stage should this fail on?"
-      required: true
-      default: "None"
-      options:
-        - "None"
-        - "dev"
-        - "test"
-        - "uat"
-        - "prod"
+      fail-on:
+        description: "Which stage should this fail on?"
+        required: true
+        default: "None"
+        options:
+          - "None"
+          - "dev"
+          - "test"
+          - "uat"
+          - "prod"
   push:
     branches:    
       - main
