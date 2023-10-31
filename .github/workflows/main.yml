@@ -43,6 +43,7 @@ jobs:
     
     - name: Failing code
       if: ${{ inputs.fail-on }} == ${{ environment.name }}
+      run: exit 1
     
 
     
